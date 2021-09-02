@@ -16,9 +16,12 @@ namespace min_error_map
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            int[,] matrix = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
-            Matrix test = new Matrix(matrix);
-            Console.WriteLine(test.ToString());
+            int[,] matrix = new int[8, 8];
+            RandomMatrix xd = new RandomMatrix(matrix, 0, 0.6);
+            var xd1 = xd.fillMatrixWithOnes(matrix);
+            Console.WriteLine(new Matrix(xd1).ToString());
+            xd1 = xd.mixMatrixRows(xd1);
+            Console.WriteLine(new Matrix(xd1).ToString());
             Application.Run(new Form1());
         }
     }
