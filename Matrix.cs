@@ -67,6 +67,7 @@ namespace min_error_map
     {
         private int numberOfMistakes = 0;
         private double percentageOfOnesInRow = 0;
+        public int[,] originalMatrix = null;
         private Random randomGenerator = new Random(Guid.NewGuid().GetHashCode());
 
         public RandomMatrix(int width, int height, int numberOfMistakes, double percentageOfOnesInRow)
@@ -74,7 +75,10 @@ namespace min_error_map
         {
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
-            this._matrix = this.generateRandomMatrix(this._matrix);
+            this._matrix = this.fillMatrixWithOnes(this._matrix);
+            this.originalMatrix = this._matrix;
+            this._matrix = this.mixMatrixRows(this._matrix);
+            this._matrix = this.addMistakesToMatrix(this._matrix);
         }
 
         public RandomMatrix(int [,] matrix, int numberOfMistakes, double percentageOfOnesInRow)
@@ -82,7 +86,10 @@ namespace min_error_map
         {
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
-            this._matrix = this.generateRandomMatrix(this._matrix);
+            this._matrix = this.fillMatrixWithOnes(this._matrix);
+            this.originalMatrix = this._matrix;
+            this._matrix = this.mixMatrixRows(this._matrix);
+            this._matrix = this.addMistakesToMatrix(this._matrix);
         }
         
         public RandomMatrix(Matrix matrix, int numberOfMistakes, double percentageOfOnesInRow)
@@ -90,17 +97,13 @@ namespace min_error_map
         {
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
-            this._matrix = this.generateRandomMatrix(this._matrix);
+            this._matrix = this.fillMatrixWithOnes(this._matrix);
+            this.originalMatrix = this._matrix;
+            this._matrix = this.mixMatrixRows(this._matrix);
+            this._matrix = this.addMistakesToMatrix(this._matrix);
         }
 
-        private int[,] generateRandomMatrix(int [,] matrix)
-        {
-            //fillMatrixWithOnes(ref matrix);
-            //mixMatrixRows(ref matrix);
-            //addMistakesToMatrix(ref matrix);
-            return matrix;
-        }
-        public int [,] fillMatrixWithOnes(int[,] matrix)
+        private int [,] fillMatrixWithOnes(int[,] matrix)
         {
             int height = matrix.GetLength(0);
             int width = matrix.GetLength(1);
@@ -124,7 +127,7 @@ namespace min_error_map
 
             return matrix;
         }
-        public int[,] mixMatrixRows(int[,] matrix)
+        private int[,] mixMatrixRows(int[,] matrix)
         {
             int height = matrix.GetLength(0);
             int width = matrix.GetLength(1);
@@ -142,19 +145,19 @@ namespace min_error_map
             return mixedMatrix;
         }
 
-        public int[,] addMistakesToMatrix(int[,] matrix)
+        private int[,] addMistakesToMatrix(int[,] matrix)
         {
             int height = matrix.GetLength(0);
             int width = matrix.GetLength(1);
             int mistakesCount = 0;
 
-            var rowsToChange = Enumerable.Range(0, height)
+            var rowsToChange = Enumerable.Repeat(Enumerable.Range(0, height).ToArray(), (int)Math.Ceiling((double)this.numberOfMistakes / height))
+                                .SelectMany(x => x)
                                 .OrderBy(row => this.randomGenerator.Next())
-                                .Take(Math.Min(height, this.numberOfMistakes));
+                                .Take(Math.Min(this.numberOfMistakes, height));
 
             foreach (var randomRow in rowsToChange)
             {
-
                 int start = this.randomGenerator.Next(width - 3);
                 for (int i = start; i < width - 2; i++)
                 {
@@ -184,7 +187,7 @@ namespace min_error_map
                     }
                 }
             }
-
+            this.numberOfMistakes = mistakesCount;
             return matrix;
         }
 

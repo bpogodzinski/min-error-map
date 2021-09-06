@@ -17,11 +17,8 @@ namespace min_error_map
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             int[,] matrix = new int[8, 8];
-            RandomMatrix xd = new RandomMatrix(matrix, 0, 0.6);
-            var xd1 = xd.fillMatrixWithOnes(matrix);
-            Console.WriteLine(new Matrix(xd1).ToString());
-            xd1 = xd.mixMatrixRows(xd1);
-            Console.WriteLine(new Matrix(xd1).ToString());
+            RandomMatrix xd = new RandomMatrix(matrix, 16, 0.4);
+            Console.WriteLine(xd.ToString());
             Application.Run(new Form1());
         }
     }
