@@ -11,6 +11,7 @@ namespace min_error_map
         protected int [,] _matrix = null;
         protected int _width = 0;
         protected int _height = 0;
+        protected int[] _columnIDs = null;
 
         public int [,] matrix
         {
@@ -22,6 +23,7 @@ namespace min_error_map
             this._width = width;
             this._height = height;
             this._matrix = new int[height, width];
+            this._columnIDs = Enumerable.Range(0, this._width).ToArray();
         }
 
         public Matrix(int [,] matrix)
@@ -29,6 +31,7 @@ namespace min_error_map
             this._matrix = matrix;
             this._height = matrix.GetLength(0);
             this._width = matrix.GetLength(1);
+            this._columnIDs = Enumerable.Range(0, this._width).ToArray();
         }
         
         public Matrix(Matrix matrix)
@@ -36,6 +39,7 @@ namespace min_error_map
             this._matrix = matrix._matrix;
             this._height = matrix._matrix.GetLength(0);
             this._width = matrix._matrix.GetLength(1);
+            this._columnIDs = Enumerable.Range(0, this._width).ToArray();
         }
 
         public int[] getColumn(int columnNumber)
@@ -151,6 +155,7 @@ namespace min_error_map
             int width = matrix.GetLength(1);
             int mistakesCount = 0;
 
+            // TODO: zmień (int)Math.Ceiling((double)this.numberOfMistakes / height)
             var rowsToChange = Enumerable.Repeat(Enumerable.Range(0, height).ToArray(), (int)Math.Ceiling((double)this.numberOfMistakes / height))
                                 .SelectMany(x => x)
                                 .OrderBy(row => this.randomGenerator.Next())
