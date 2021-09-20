@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,9 +57,62 @@ namespace min_error_map
                     .ToArray();
         }
 
+        public bool swapColumns(int id1, int id2)
+        {  
+
+            var tmpSwap = this._columnIDs[id1];
+            this._columnIDs[id1] = this._columnIDs[id2];
+            this._columnIDs[id2] = tmpSwap;
+
+            for (int i = 0; i < this._height; i++)
+            {
+                var tmpColumnSwap = this._matrix[i, id1];
+                this._matrix[i, id1] = this._matrix[i, id2];
+                this._matrix[i, id2] = tmpColumnSwap;
+            }
+            return true;
+        }
+
+        private bool isRowConsecutiveOnes(int [] row)
+        {
+            bool foundOne = false;
+            bool foundZeroAfterOne = false;
+
+            for (int i = 0; i < row.Length; i++)
+            {
+                if (!foundOne && row[i] == 1)
+                {
+                    foundOne = true;
+                }
+                if (foundOne && row[i] == 0)
+                {
+                    foundZeroAfterOne = true;
+                }
+                if (foundZeroAfterOne && row[i] == 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool isConsecutiveOnes()
+        {
+            for (int row = 0; row < this._height; row++)
+            {
+                if (isRowConsecutiveOnes(getRow(row)) == false) 
+                    return false;
+            }
+            return true;
+        }
+
+        //TODO: add greedy heuristic + calculate cmax
+
+
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"Columns order: {String.Join(" ", this._columnIDs)}");
             for(int i = 0; i < this._height; ++i)
             {
                 stringBuilder.AppendLine(String.Join(" ", this.getRow(i)));
@@ -67,6 +121,7 @@ namespace min_error_map
         }
     }
 
+    //TODO: remove Debug.Assert statements 
     class RandomMatrix : Matrix
     {
         private int numberOfMistakes = 0;
@@ -80,9 +135,11 @@ namespace min_error_map
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
             this._matrix = this.fillMatrixWithOnes(this._matrix);
+            Debug.Assert(isConsecutiveOnes() == true);
             this.originalMatrix = this._matrix;
             this._matrix = this.mixMatrixRows(this._matrix);
             this._matrix = this.addMistakesToMatrix(this._matrix);
+            Debug.Assert(isConsecutiveOnes() == false);
         }
 
         public RandomMatrix(int [,] matrix, int numberOfMistakes, double percentageOfOnesInRow)
@@ -91,9 +148,11 @@ namespace min_error_map
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
             this._matrix = this.fillMatrixWithOnes(this._matrix);
+            Debug.Assert(isConsecutiveOnes() == true);
             this.originalMatrix = this._matrix;
             this._matrix = this.mixMatrixRows(this._matrix);
             this._matrix = this.addMistakesToMatrix(this._matrix);
+            Debug.Assert(isConsecutiveOnes() == false);
         }
         
         public RandomMatrix(Matrix matrix, int numberOfMistakes, double percentageOfOnesInRow)
@@ -102,9 +161,11 @@ namespace min_error_map
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
             this._matrix = this.fillMatrixWithOnes(this._matrix);
+            Debug.Assert(isConsecutiveOnes() == true);
             this.originalMatrix = this._matrix;
             this._matrix = this.mixMatrixRows(this._matrix);
             this._matrix = this.addMistakesToMatrix(this._matrix);
+            Debug.Assert(isConsecutiveOnes() == false);
         }
 
         private int [,] fillMatrixWithOnes(int[,] matrix)
@@ -113,12 +174,11 @@ namespace min_error_map
             int width = matrix.GetLength(1);
             int lengthStringOfOnes = Convert.ToInt32(Math.Floor(this.percentageOfOnesInRow * width));
             bool areAllCollumnsCovered = false;
-            int startPositionOfOnes = 0;
             int endPositionOfOnes = 0;
 
             for (int i = 0; i < height; i++)
             {
-                startPositionOfOnes = areAllCollumnsCovered ? this.randomGenerator.Next(width - lengthStringOfOnes) : endPositionOfOnes;
+                int startPositionOfOnes = areAllCollumnsCovered ? this.randomGenerator.Next(width - lengthStringOfOnes) : endPositionOfOnes;
                 endPositionOfOnes = startPositionOfOnes + lengthStringOfOnes;
                 if (endPositionOfOnes > width)
                 {

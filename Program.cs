@@ -16,8 +16,11 @@ namespace min_error_map
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            int[,] matrix = new int[8, 8];
-            RandomMatrix xd = new RandomMatrix(matrix, 16, 0.4);
+            //int[,] matrix = new int[,] { { 1, 0, 0}, { 1, 0, 0} };
+            RandomMatrix xd = new RandomMatrix(100, 100, 16, 0.4);
+            //Matrix xd = new Matrix(matrix);
+            Console.WriteLine(xd.ToString());
+            xd.swapColumns(0, 1);
             Console.WriteLine(xd.ToString());
             Application.Run(new Form1());
         }
