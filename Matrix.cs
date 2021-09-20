@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace min_error_map
 {
     class Matrix
     {
-        protected int [,] _matrix = null;
+        protected int[,] _matrix = null;
         protected int _width = 0;
         protected int _height = 0;
         protected int[] _columnIDs = null;
 
-        public int [,] matrix
+        public int[,] matrix
         {
             get { return _matrix; }
         }
@@ -27,14 +25,14 @@ namespace min_error_map
             this._columnIDs = Enumerable.Range(0, this._width).ToArray();
         }
 
-        public Matrix(int [,] matrix)
+        public Matrix(int[,] matrix)
         {
             this._matrix = matrix;
             this._height = matrix.GetLength(0);
             this._width = matrix.GetLength(1);
             this._columnIDs = Enumerable.Range(0, this._width).ToArray();
         }
-        
+
         public Matrix(Matrix matrix)
         {
             this._matrix = matrix._matrix;
@@ -58,7 +56,7 @@ namespace min_error_map
         }
 
         public bool swapColumns(int id1, int id2)
-        {  
+        {
 
             var tmpSwap = this._columnIDs[id1];
             this._columnIDs[id1] = this._columnIDs[id2];
@@ -73,7 +71,7 @@ namespace min_error_map
             return true;
         }
 
-        private bool isRowConsecutiveOnes(int [] row)
+        private bool isRowConsecutiveOnes(int[] row)
         {
             bool foundOne = false;
             bool foundZeroAfterOne = false;
@@ -100,7 +98,7 @@ namespace min_error_map
         {
             for (int row = 0; row < this._height; row++)
             {
-                if (isRowConsecutiveOnes(getRow(row)) == false) 
+                if (isRowConsecutiveOnes(getRow(row)) == false)
                     return false;
             }
             return true;
@@ -113,7 +111,7 @@ namespace min_error_map
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine($"Columns order: {String.Join(" ", this._columnIDs)}");
-            for(int i = 0; i < this._height; ++i)
+            for (int i = 0; i < this._height; ++i)
             {
                 stringBuilder.AppendLine(String.Join(" ", this.getRow(i)));
             }
@@ -142,7 +140,7 @@ namespace min_error_map
             Debug.Assert(isConsecutiveOnes() == false);
         }
 
-        public RandomMatrix(int [,] matrix, int numberOfMistakes, double percentageOfOnesInRow)
+        public RandomMatrix(int[,] matrix, int numberOfMistakes, double percentageOfOnesInRow)
             : base(matrix)
         {
             this.numberOfMistakes = numberOfMistakes;
@@ -154,7 +152,7 @@ namespace min_error_map
             this._matrix = this.addMistakesToMatrix(this._matrix);
             Debug.Assert(isConsecutiveOnes() == false);
         }
-        
+
         public RandomMatrix(Matrix matrix, int numberOfMistakes, double percentageOfOnesInRow)
             : base(matrix)
         {
@@ -168,7 +166,7 @@ namespace min_error_map
             Debug.Assert(isConsecutiveOnes() == false);
         }
 
-        private int [,] fillMatrixWithOnes(int[,] matrix)
+        private int[,] fillMatrixWithOnes(int[,] matrix)
         {
             int height = matrix.GetLength(0);
             int width = matrix.GetLength(1);
@@ -258,8 +256,4 @@ namespace min_error_map
 
     }
 
-    //class InputMatrix : RandomMatrix
-    //{
-    //    private int numerOfFieldsToDeleteForOptimalMatrix;
-    //}
 }
