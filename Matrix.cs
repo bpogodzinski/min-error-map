@@ -8,7 +8,7 @@ namespace min_error_map
     class Matrix
     {
         protected int[,] _matrix = null;
-        protected int _width = 0;
+        public int _width = 0;
         protected int _height = 0;
         protected int[] _columnIDs = null;
 
@@ -27,7 +27,7 @@ namespace min_error_map
 
         public Matrix(int[,] matrix)
         {
-            this._matrix = matrix;
+            this._matrix = (int[,])matrix.Clone();
             this._height = matrix.GetLength(0);
             this._width = matrix.GetLength(1);
             this._columnIDs = Enumerable.Range(0, this._width).ToArray();
@@ -35,7 +35,7 @@ namespace min_error_map
 
         public Matrix(Matrix matrix)
         {
-            this._matrix = matrix._matrix;
+            this._matrix = (int[,])matrix._matrix.Clone();
             this._height = matrix._matrix.GetLength(0);
             this._width = matrix._matrix.GetLength(1);
             this._columnIDs = Enumerable.Range(0, this._width).ToArray();

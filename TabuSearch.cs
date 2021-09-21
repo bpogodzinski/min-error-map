@@ -8,12 +8,12 @@ namespace min_error_map
 {
     class TabuSearch
     {
-        Matrix matrix = null;
+        Matrix originalMatrix = null;
         int cmax = -1;
 
         public TabuSearch(Matrix inputMatrix)
         {
-            this.matrix = inputMatrix;
+            this.originalMatrix = inputMatrix;
             /**
              * Generate greedy solution
              * Save CMax
