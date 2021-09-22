@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Collections.Generic;
 using System.Text;
 
 namespace min_error_map
@@ -105,7 +106,126 @@ namespace min_error_map
         }
 
         //TODO: add greedy heuristic + calculate cmax
+        
+        // { 1, 1, 0, 0, 1, 1, 1, 0, 1 }
+        // [ [0,1], [4,5,6], [8] ]
+        private List<List<int>> partitionOnesIntoConsecutiveListOfIndexes(int[] row)
+        {
+            var indexesOfOnes = row.Select((b, i) => b == 1 ? i : -1).Where(i => i != -1).ToArray();
+            List<List<int>> partitionedOnes = new List<List<int>>();
+            List<int> currentSequence = new List<int>() { indexesOfOnes[0] };
 
+            for (int i = 0; i < indexesOfOnes.Length - 1; i++)
+            {
+                if ((indexesOfOnes[i] + 1) == indexesOfOnes[i + 1])
+                {
+                    currentSequence.Add(indexesOfOnes[i + 1]);
+                }
+                else
+                {
+                    partitionedOnes.Add(new List<int>(currentSequence));
+                    currentSequence.Clear();
+                    currentSequence.Add(indexesOfOnes[i + 1]);
+                }
+            }
+            partitionedOnes.Add(new List<int>(currentSequence));
+            return partitionedOnes;
+        }
+
+        private Tuple<int, List<int>> cmaxRow(int[] row)
+        {
+            List<int> indexesToChange = new List<int>();
+            int cmax = 0;
+            // Patrition indexes of ones into list
+            var partitions = partitionOnesIntoConsecutiveListOfIndexes(row);
+            // Find first longest sequence
+            var longestSequence = partitions.OrderByDescending(m => m.Count()).First();
+            var indexOfLongestSequenceOnList = partitions.IndexOf(longestSequence);
+            var rightPartitions = partitions.Where((item, index) => index > indexOfLongestSequenceOnList).ToList();
+            var leftPartitions = partitions.Where((item, index) => index < indexOfLongestSequenceOnList).ToList();
+
+            while (rightPartitions.Count != 0)
+            {
+                var currentPartition = rightPartitions.Last();
+
+                int leftIndexOnes = longestSequence.Last();
+                int rightIndexOnes = currentPartition.Last();
+                var distance = rightIndexOnes - leftIndexOnes;
+                //{ 1, 1, 1, 1, 1, | 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1 |, 0 }; first slice
+                var slice = row.Skip(leftIndexOnes + 1).Take(distance).ToArray(); // +1 because we don't want to take "leftover" one
+                var numberOfOnes = slice.Count(x => x == 1);
+                /*
+                 * If change is optimal
+                 * - save cmax
+                 * - calculate left side
+                 * If not
+                 *  - remove one "one"
+                 *  - new iteration
+                 */
+                if (distance - numberOfOnes <= numberOfOnes)
+                {
+                    cmax += distance - numberOfOnes;
+                    var indexesOfZeroToChange = slice.Select((b, i) => b == 0 ? i + leftIndexOnes + 1 : -1).Where(i => i != -1).ToList();
+                    indexesToChange.AddRange(indexesOfZeroToChange);
+                    break;
+                }
+                else
+                {
+                    cmax += 1;
+                    var indexOfOneToRemove = currentPartition.Last();
+                    currentPartition.RemoveAt(currentPartition.Count - 1);
+                    indexesToChange.Add(indexOfOneToRemove);
+                    if (currentPartition.Count == 0)
+                        rightPartitions.Remove(currentPartition);
+                }
+            }
+
+            while (leftPartitions.Count != 0)
+            {
+                var currentPartition = leftPartitions.First();
+
+                int leftIndexOnes = currentPartition.First();
+                int rightIndexOnes = longestSequence.First();
+                var distance = rightIndexOnes - leftIndexOnes;
+                //{0, | 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, | 1, 1, 1, 1, 1 };
+                var slice = row.Skip(leftIndexOnes + 1).Take(distance).ToArray();
+                var numberOfOnes = slice.Count(x => x == 1);
+                if (distance - numberOfOnes <= numberOfOnes)
+                {
+                    cmax += distance - numberOfOnes;
+                    var indexesOfZeroToChange = slice.Select((b, i) => b == 0 ? i + leftIndexOnes + 1 : -1).Where(i => i != -1).ToList();
+                    indexesToChange.AddRange(indexesOfZeroToChange);
+                    break;
+                }
+                else
+                {
+                    cmax += 1;
+                    var indexOfOneToRemove = currentPartition.Last();
+                    currentPartition.RemoveAt(currentPartition.Count - 1);
+                    indexesToChange.Add(indexOfOneToRemove);
+                    if (currentPartition.Count == 0)
+                        leftPartitions.Remove(currentPartition);
+                }
+            }
+
+            return new Tuple<int, List<int>>(cmax, indexesToChange);
+        }
+
+        public Tuple<int, List<List<int>>> calculateCmax()
+        {
+            int cmaxSum = 0;
+            List<List<int>> indexesToChange = new List<List<int>>();
+
+            for (int i = 0; i < this._height; i++)
+            {
+                var row = getRow(i);
+                var rowResult = cmaxRow(row);
+                cmaxSum += rowResult.Item1;
+                indexesToChange.Add(rowResult.Item2);
+            }
+
+            return new Tuple<int, List<List<int>>>(cmaxSum, indexesToChange);
+        }
 
         public override string ToString()
         {
@@ -255,5 +375,6 @@ namespace min_error_map
         }
 
     }
+
 
 }
