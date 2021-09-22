@@ -9,13 +9,28 @@ namespace min_error_map
     class Matrix
     {
         protected int[,] _matrix = null;
-        public int _width = 0;
+        protected int _width = 0;
         protected int _height = 0;
         protected int[] _columnIDs = null;
+        protected int _cmax = -1;
 
         public int[,] matrix
         {
             get { return _matrix; }
+        }
+
+        public int[] ColumnIDs
+        {
+            get { return _columnIDs; }
+        }
+        public int Width
+        {
+            get { return _width; }
+        }
+
+        public int Height
+        {
+            get { return _height; }
         }
 
         public Matrix(int width, int height)
@@ -37,9 +52,10 @@ namespace min_error_map
         public Matrix(Matrix matrix)
         {
             this._matrix = (int[,])matrix._matrix.Clone();
-            this._height = matrix._matrix.GetLength(0);
-            this._width = matrix._matrix.GetLength(1);
-            this._columnIDs = Enumerable.Range(0, this._width).ToArray();
+            this._height = matrix._width;
+            this._width = matrix._height;
+            this._columnIDs = (int[])matrix._columnIDs.Clone();
+            this._cmax = matrix._cmax;
         }
 
         public int[] getColumn(int columnNumber)
@@ -105,7 +121,6 @@ namespace min_error_map
             return true;
         }
 
-        //TODO: add greedy heuristic + calculate cmax
         
         // { 1, 1, 0, 0, 1, 1, 1, 0, 1 }
         // [ [0,1], [4,5,6], [8] ]
@@ -223,7 +238,7 @@ namespace min_error_map
                 cmaxSum += rowResult.Item1;
                 indexesToChange.Add(rowResult.Item2);
             }
-
+            this._cmax = cmaxSum;
             return new Tuple<int, List<List<int>>>(cmaxSum, indexesToChange);
         }
 
@@ -334,8 +349,7 @@ namespace min_error_map
             int mistakesCount = 0;
 
             // TODO: zmień (int)Math.Ceiling((double)this.numberOfMistakes / height)
-            var rowsToChange = Enumerable.Repeat(Enumerable.Range(0, height).ToArray(), (int)Math.Ceiling((double)this.numberOfMistakes / height))
-                                .SelectMany(x => x)
+            var rowsToChange = Enumerable.Range(0, height).ToArray()
                                 .OrderBy(row => this.randomGenerator.Next())
                                 .Take(Math.Min(this.numberOfMistakes, height));
 

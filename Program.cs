@@ -18,6 +18,9 @@ namespace min_error_map
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            RandomMatrix m = new RandomMatrix(10, 10, 0, 0.55);
+            var xd = m.ColumnIDs;
+            xd[0] = 99999999;
             //int[] row = new int[] { 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 };
             //row = row.Reverse().ToArray();
             //int[] row = new int[] { 1, 1, 1, 0, 0, 1, 0 };

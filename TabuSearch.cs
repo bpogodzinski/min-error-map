@@ -8,16 +8,33 @@ namespace min_error_map
 {
     class TabuSearch
     {
-        Matrix originalMatrix = null;
-        int cmax = -1;
+        Matrix globalSolution = null;
+        int bestCmax = -1;
+        Random randomGenerator = new Random(Guid.NewGuid().GetHashCode());
+
+        private void makeMove(Matrix localSolution, List<(int,int)> tabuList)
+        {
+            //var randomSwap = localSolution.
+        }
 
         public TabuSearch(Matrix inputMatrix)
         {
-            this.originalMatrix = inputMatrix;
-            /**
-             * Generate greedy solution
-             * Save CMax
-            **/
+            this.globalSolution = inputMatrix;
+            this.bestCmax = inputMatrix.calculateCmax().Item1;
         }
+
+        public void run(int timesToRestart, int tabuListSize)
+        {
+            Matrix localSolution = new Matrix(globalSolution);
+            List<(int, int)> tabuList = new List<(int, int)>();
+            List<Matrix> localSolutionsList = new List<Matrix>();
+
+            while(timesToRestart != 0)
+            {
+                makeMove(localSolution, tabuList);
+            }
+
+        }
+
     }
 }
