@@ -18,9 +18,32 @@ namespace min_error_map
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            RandomMatrix m = new RandomMatrix(10, 10, 0, 0.55);
-            var xd = m.ColumnIDs;
-            xd[0] = 99999999;
+
+            int[,] matrix = new int[,]
+            {
+                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1 },
+                {1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0 },
+                {1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
+                {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1 },
+                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 },
+                {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1 },
+                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 },
+                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1 },
+            };
+
+            //var matrix = new RandomMatrix(100, 100, 30, 0.3);
+
+            Debug.WriteLine("Before");
+            var m = new Matrix(matrix);
+            m.calculateCmax();
+            Debug.WriteLine(m.ToString());
+            Debug.WriteLine("");
+            TabuSearch ts = new TabuSearch(m);
+            ts.run(10, 5, 100);
+            Debug.WriteLine("After");
+            Debug.WriteLine("");
+            Debug.WriteLine(ts.globalSolution.ToString());
+
             //int[] row = new int[] { 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 };
             //row = row.Reverse().ToArray();
             //int[] row = new int[] { 1, 1, 1, 0, 0, 1, 0 };

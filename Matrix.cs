@@ -13,6 +13,7 @@ namespace min_error_map
         protected int _height = 0;
         protected int[] _columnIDs = null;
         protected int _cmax = -1;
+        protected List<List<int>> _indexesToChange = null;
 
         public int[,] matrix
         {
@@ -31,6 +32,15 @@ namespace min_error_map
         public int Height
         {
             get { return _height; }
+        }
+
+        public int CMAX
+        {
+            get { return _cmax; }
+        }
+        public List<List<int>> IndexesToChange
+        {
+            get { return _indexesToChange; }
         }
 
         public Matrix(int width, int height)
@@ -52,8 +62,8 @@ namespace min_error_map
         public Matrix(Matrix matrix)
         {
             this._matrix = (int[,])matrix._matrix.Clone();
-            this._height = matrix._width;
-            this._width = matrix._height;
+            this._height = matrix._height; 
+            this._width = matrix._width;
             this._columnIDs = (int[])matrix._columnIDs.Clone();
             this._cmax = matrix._cmax;
         }
@@ -239,17 +249,34 @@ namespace min_error_map
                 indexesToChange.Add(rowResult.Item2);
             }
             this._cmax = cmaxSum;
+            this._indexesToChange = indexesToChange;
             return new Tuple<int, List<List<int>>>(cmaxSum, indexesToChange);
         }
 
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine($"Columns order: {String.Join(" ", this._columnIDs)}");
+            stringBuilder.AppendLine($"Columns order: {String.Join(" ", this._columnIDs)}\n" +
+                $"CMAX: {this._cmax}");
+
+            if(IndexesToChange != null)
+            {
+                stringBuilder.Append("Indexes to change: ");
+                for (int i = 0; i < IndexesToChange.Count; i++)
+                {
+                    foreach(var col in IndexesToChange[i])
+                    {
+                        stringBuilder.Append($"[{i},{col}] ");
+                    }
+                }
+                stringBuilder.AppendLine();
+            }
+
             for (int i = 0; i < this._height; ++i)
             {
                 stringBuilder.AppendLine(String.Join(" ", this.getRow(i)));
             }
+
             return stringBuilder.ToString();
         }
     }
