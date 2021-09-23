@@ -19,27 +19,28 @@ namespace min_error_map
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            int[,] matrix = new int[,]
-            {
-                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1 },
-                {1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0 },
-                {1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
-                {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1 },
-                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 },
-                {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1 },
-                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 },
-                {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1 },
-            };
+            //int[,] matrix = new int[,]
+            //{
+            //    {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1 },
+            //    {1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0 },
+            //    {1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
+            //    {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1 },
+            //    {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 },
+            //    {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1 },
+            //    {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 },
+            //    {1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1 },
+            //};
 
-            //var matrix = new RandomMatrix(100, 100, 30, 0.3);
-
+            var x = 25;
+            var matrix = new RandomMatrix(x, x, (int)(x*2) , 0.3);
+            Debug.Assert(matrix.isConsecutiveOnes() == false);
             Debug.WriteLine("Before");
             var m = new Matrix(matrix);
             m.calculateCmax();
             Debug.WriteLine(m.ToString());
             Debug.WriteLine("");
             TabuSearch ts = new TabuSearch(m);
-            ts.run(10, 5, 100);
+            ts.run(100, 20, 20);
             Debug.WriteLine("After");
             Debug.WriteLine("");
             Debug.WriteLine(ts.globalSolution.ToString());

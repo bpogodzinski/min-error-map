@@ -299,7 +299,7 @@ namespace min_error_map
             this.originalMatrix = this._matrix;
             this._matrix = this.mixMatrixRows(this._matrix);
             this._matrix = this.addMistakesToMatrix(this._matrix);
-            Debug.Assert(isConsecutiveOnes() == false);
+            Debug.Assert(this.isConsecutiveOnes() == false);
         }
 
         public RandomMatrix(int[,] matrix, int numberOfMistakes, double percentageOfOnesInRow)
@@ -376,9 +376,11 @@ namespace min_error_map
             int mistakesCount = 0;
 
             // TODO: zmień (int)Math.Ceiling((double)this.numberOfMistakes / height)
-            var rowsToChange = Enumerable.Range(0, height).ToArray()
-                                .OrderBy(row => this.randomGenerator.Next())
-                                .Take(Math.Min(this.numberOfMistakes, height));
+            var rowsToChange = Enumerable.Repeat(Enumerable.Range(0, height).ToArray(),
+                                                (int)Math.Ceiling((double)this.numberOfMistakes / height))
+                                        .SelectMany(x => x)
+                                        .OrderBy(row => this.randomGenerator.Next())
+                                        .Take(this.numberOfMistakes);
 
             foreach (var randomRow in rowsToChange)
             {
