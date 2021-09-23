@@ -6,7 +6,7 @@ using System.Text;
 
 namespace min_error_map
 {
-    class Matrix
+    public class Matrix
     {
         protected int[,] _matrix = null;
         protected int _width = 0;
@@ -279,12 +279,24 @@ namespace min_error_map
 
             return stringBuilder.ToString();
         }
+
+        public string matrixToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < this._height; ++i)
+            {
+                stringBuilder.AppendLine(String.Join(" ", this.getRow(i)));
+            }
+
+            return stringBuilder.ToString();
+        }
     }
 
     //TODO: remove Debug.Assert statements 
     class RandomMatrix : Matrix
     {
-        private int numberOfMistakes = 0;
+        public int numberOfMistakes = 0;
         private double percentageOfOnesInRow = 0;
         public int[,] originalMatrix = null;
         private Random randomGenerator = new Random(Guid.NewGuid().GetHashCode());
