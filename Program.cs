@@ -61,19 +61,19 @@ namespace min_error_map
             };
 
 
-            var x = 25;
-            //var matrix = new RandomMatrix(x, x, (int)(x*2) , 0.3);
-            //Debug.Assert(matrix.isConsecutiveOnes() == false);
-            Debug.WriteLine("Before");
-            var m = new Matrix(matrix);
-            m.calculateCmax();
-            Debug.WriteLine(m.ToString());
-            Debug.WriteLine("");
-            TabuSearch ts = new TabuSearch(m);
-            ts.run(100, 20, 100);
-            Debug.WriteLine("After");
-            Debug.WriteLine("");
-            Debug.WriteLine(ts.globalSolution.ToString());
+            //var x = 25;
+            ////var matrix = new RandomMatrix(x, x, (int)(x*2) , 0.3);
+            ////Debug.Assert(matrix.isConsecutiveOnes() == false);
+            //Debug.WriteLine("Before");
+            //var m = new Matrix(matrix);
+            //m.calculateCmax();
+            //Debug.WriteLine(m.ToString());
+            //Debug.WriteLine("");
+            //TabuSearch ts = new TabuSearch(m);
+            //ts.run(100, 20, 100);
+            //Debug.WriteLine("After");
+            //Debug.WriteLine("");
+            //Debug.WriteLine(ts.globalSolution.ToString());
 
             //int[] row = new int[] { 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 };
             //row = row.Reverse().ToArray();
@@ -87,8 +87,8 @@ namespace min_error_map
             //Console.WriteLine(original.ToString());
             //Console.WriteLine(copy.ToString());
 
-
             Application.Run(new mainForm());
+
         }
     }
 }
