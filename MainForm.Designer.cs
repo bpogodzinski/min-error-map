@@ -38,13 +38,37 @@
             this.mainPanelAddMatrixFromFileButton = new System.Windows.Forms.Button();
             this.mainPanelMatrixOptions = new System.Windows.Forms.TableLayoutPanel();
             this.mainPanelSaveInputButton = new System.Windows.Forms.Button();
-            this.mainPanelTabuSearch = new System.Windows.Forms.TableLayoutPanel();
             this.mainRunTabuButton = new System.Windows.Forms.Button();
+            this.mainPanelTabuSearch = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericRestarts = new System.Windows.Forms.NumericUpDown();
+            this.numericTabuSize = new System.Windows.Forms.NumericUpDown();
+            this.numericMaxIter = new System.Windows.Forms.NumericUpDown();
+            this.numericDivMoves = new System.Windows.Forms.NumericUpDown();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.logBox = new System.Windows.Forms.RichTextBox();
+            this.buttonStop = new System.Windows.Forms.Button();
             this.mainPanel1.SuspendLayout();
             this.mainPanel2.SuspendLayout();
             this.mainPanelMatrix.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.mainPanelMatrixOptions.SuspendLayout();
+            this.mainPanelTabuSearch.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericRestarts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTabuSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMaxIter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDivMoves)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel1
@@ -167,7 +191,7 @@
             this.mainPanelMatrixOptions.Name = "mainPanelMatrixOptions";
             this.mainPanelMatrixOptions.RowCount = 1;
             this.mainPanelMatrixOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mainPanelMatrixOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.mainPanelMatrixOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 128F));
             this.mainPanelMatrixOptions.Size = new System.Drawing.Size(735, 128);
             this.mainPanelMatrixOptions.TabIndex = 3;
             // 
@@ -182,20 +206,6 @@
             this.mainPanelSaveInputButton.UseVisualStyleBackColor = true;
             this.mainPanelSaveInputButton.Click += new System.EventHandler(this.mainPanelSaveInputButton_Click);
             // 
-            // mainPanelTabuSearch
-            // 
-            this.mainPanelTabuSearch.ColumnCount = 2;
-            this.mainPanelTabuSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanelTabuSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanelTabuSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanelTabuSearch.Location = new System.Drawing.Point(750, 3);
-            this.mainPanelTabuSearch.Name = "mainPanelTabuSearch";
-            this.mainPanelTabuSearch.RowCount = 2;
-            this.mainPanelTabuSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanelTabuSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanelTabuSearch.Size = new System.Drawing.Size(741, 735);
-            this.mainPanelTabuSearch.TabIndex = 1;
-            // 
             // mainRunTabuButton
             // 
             this.mainRunTabuButton.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -206,6 +216,256 @@
             this.mainRunTabuButton.Text = "RUN TABU SEARCH";
             this.mainRunTabuButton.UseVisualStyleBackColor = true;
             this.mainRunTabuButton.Click += new System.EventHandler(this.mainRunTabuButton_Click);
+            // 
+            // mainPanelTabuSearch
+            // 
+            this.mainPanelTabuSearch.ColumnCount = 1;
+            this.mainPanelTabuSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.mainPanelTabuSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.mainPanelTabuSearch.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.mainPanelTabuSearch.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.mainPanelTabuSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanelTabuSearch.Location = new System.Drawing.Point(750, 3);
+            this.mainPanelTabuSearch.Name = "mainPanelTabuSearch";
+            this.mainPanelTabuSearch.RowCount = 2;
+            this.mainPanelTabuSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.619048F));
+            this.mainPanelTabuSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.38095F));
+            this.mainPanelTabuSearch.Size = new System.Drawing.Size(741, 735);
+            this.mainPanelTabuSearch.TabIndex = 1;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label4, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.numericRestarts, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.numericTabuSize, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.numericMaxIter, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.numericDivMoves, 3, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(735, 50);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(177, 25);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "# OF RESTARTS";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(186, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(177, 25);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "TABU LIST SIZE";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(369, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(177, 25);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "MAX ITER W/O PROGRESS";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(552, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(180, 25);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "% OF DIVERSIFY MOVES";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // numericRestarts
+            // 
+            this.numericRestarts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericRestarts.Location = new System.Drawing.Point(3, 28);
+            this.numericRestarts.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericRestarts.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericRestarts.Name = "numericRestarts";
+            this.numericRestarts.Size = new System.Drawing.Size(177, 20);
+            this.numericRestarts.TabIndex = 4;
+            this.numericRestarts.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericTabuSize
+            // 
+            this.numericTabuSize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericTabuSize.Location = new System.Drawing.Point(186, 28);
+            this.numericTabuSize.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericTabuSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericTabuSize.Name = "numericTabuSize";
+            this.numericTabuSize.Size = new System.Drawing.Size(177, 20);
+            this.numericTabuSize.TabIndex = 5;
+            this.numericTabuSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericMaxIter
+            // 
+            this.numericMaxIter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericMaxIter.Location = new System.Drawing.Point(369, 28);
+            this.numericMaxIter.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.numericMaxIter.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMaxIter.Name = "numericMaxIter";
+            this.numericMaxIter.Size = new System.Drawing.Size(177, 20);
+            this.numericMaxIter.TabIndex = 6;
+            this.numericMaxIter.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericDivMoves
+            // 
+            this.numericDivMoves.DecimalPlaces = 2;
+            this.numericDivMoves.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericDivMoves.Location = new System.Drawing.Point(552, 28);
+            this.numericDivMoves.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            131072});
+            this.numericDivMoves.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericDivMoves.Name = "numericDivMoves";
+            this.numericDivMoves.Size = new System.Drawing.Size(180, 20);
+            this.numericDivMoves.TabIndex = 7;
+            this.numericDivMoves.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 59);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.08469F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.915304F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(735, 673);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.progressBar, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.logBox, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.19926F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.80075F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(729, 606);
+            this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressBar.Location = new System.Drawing.Point(3, 543);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(723, 60);
+            this.progressBar.TabIndex = 1;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.buttonStop, 0, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 615);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(729, 55);
+            this.tableLayoutPanel5.TabIndex = 2;
+            // 
+            // logBox
+            // 
+            this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logBox.Enabled = false;
+            this.logBox.Location = new System.Drawing.Point(3, 3);
+            this.logBox.Name = "logBox";
+            this.logBox.ReadOnly = true;
+            this.logBox.Size = new System.Drawing.Size(723, 534);
+            this.logBox.TabIndex = 2;
+            this.logBox.Text = "";
+            // 
+            // buttonStop
+            // 
+            this.buttonStop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonStop.Location = new System.Drawing.Point(3, 3);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(723, 49);
+            this.buttonStop.TabIndex = 0;
+            this.buttonStop.Text = "STOP";
+            this.buttonStop.UseVisualStyleBackColor = true;
             // 
             // mainForm
             // 
@@ -221,6 +481,16 @@
             this.mainPanelMatrix.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.mainPanelMatrixOptions.ResumeLayout(false);
+            this.mainPanelTabuSearch.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericRestarts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTabuSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMaxIter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDivMoves)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -239,6 +509,21 @@
         private System.Windows.Forms.Button mainPanelSaveInputButton;
         public System.Windows.Forms.RichTextBox mainTextboxMatrix;
         private System.Windows.Forms.Button mainRunTabuButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericRestarts;
+        private System.Windows.Forms.NumericUpDown numericTabuSize;
+        private System.Windows.Forms.NumericUpDown numericMaxIter;
+        private System.Windows.Forms.NumericUpDown numericDivMoves;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        public System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.RichTextBox logBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button buttonStop;
     }
 }
 

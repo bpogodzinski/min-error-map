@@ -80,6 +80,10 @@ namespace min_error_map
         private void mainRunTabuButton_Click(object sender, EventArgs e)
         {
             int[,] matrix = null;
+            int numberOfRestarts;
+            int tabuListSize;
+            int maxIterWithoutProgress;
+            double divMovements;
 
             try
             {
@@ -93,6 +97,14 @@ namespace min_error_map
                                                                .Select(line => line.Split(' ').Select(i => int.Parse(i)).ToArray())
                                                                .ToArray();
                 matrix = JaggedToMultidimensional(tmpMatrix);
+                numberOfRestarts = (int)numericRestarts.Value;
+                tabuListSize = (int)numericTabuSize.Value;
+                maxIterWithoutProgress = (int)numericMaxIter.Value;
+                divMovements = (double)numericDivMoves.Value;
+
+                if(divMovements > 1 || divMovements < 0)
+                    throw new ArgumentException("Bad value for % OF DIVERSIFY MOVES");
+
             }
             catch (Exception error)
             {
@@ -100,7 +112,6 @@ namespace min_error_map
                 return;
             }
             
-
             
         }
     }

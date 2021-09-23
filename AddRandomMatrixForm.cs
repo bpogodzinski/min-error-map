@@ -36,13 +36,13 @@ namespace min_error_map
                 width = (int)numericWidth.Value;
                 mistakes = (int)numericMistakes.Value;
                 percent = (double)numericPercent.Value;
-                if (0 > percent || 1 < percent)
-                    throw new ArgumentException();
+                if (percent < 0 || percent > 1)
+                    throw new ArgumentException("Invalid value for percent value");
 
             }
-            catch (Exception)
+            catch (Exception error)
             {
-                MessageBox.Show("Invalid arguments", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{error.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -50,7 +50,7 @@ namespace min_error_map
             var mistakesMade = randomMatrix.numberOfMistakes;
             main.mainTextboxMatrix.Text = randomMatrix.matrixToString();
             main.matrix = randomMatrix;
-            MessageBox.Show($"Number of mistakes made: {mistakesMade}", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"CMAX estimate: {mistakesMade}", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
     }

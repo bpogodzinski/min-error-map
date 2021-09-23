@@ -171,7 +171,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 95);
             this.label5.TabIndex = 3;
-            this.label5.Text = "PERCENT OF ONES";
+            this.label5.Text = "% OF ONES IN ROW";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -189,34 +189,81 @@
             // numericHeight
             // 
             this.numericHeight.Location = new System.Drawing.Point(382, 3);
+            this.numericHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericHeight.Name = "numericHeight";
             this.numericHeight.Size = new System.Drawing.Size(120, 20);
             this.numericHeight.TabIndex = 4;
             this.numericHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericWidth
             // 
             this.numericWidth.Location = new System.Drawing.Point(382, 97);
+            this.numericWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericWidth.Name = "numericWidth";
             this.numericWidth.Size = new System.Drawing.Size(120, 20);
             this.numericWidth.TabIndex = 5;
             this.numericWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericMistakes
             // 
             this.numericMistakes.Location = new System.Drawing.Point(382, 191);
+            this.numericMistakes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericMistakes.Name = "numericMistakes";
             this.numericMistakes.Size = new System.Drawing.Size(120, 20);
             this.numericMistakes.TabIndex = 6;
             this.numericMistakes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericMistakes.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericPercent
             // 
+            this.numericPercent.DecimalPlaces = 2;
             this.numericPercent.Location = new System.Drawing.Point(382, 285);
+            this.numericPercent.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            131072});
+            this.numericPercent.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.numericPercent.Name = "numericPercent";
             this.numericPercent.Size = new System.Drawing.Size(120, 20);
             this.numericPercent.TabIndex = 7;
             this.numericPercent.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericPercent.ThousandsSeparator = true;
+            this.numericPercent.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             // 
             // randomMatrixBackButton
             // 
