@@ -52,8 +52,8 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.logBox = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonStop = new System.Windows.Forms.Button();
             this.mainPanel1.SuspendLayout();
             this.mainPanel2.SuspendLayout();
@@ -433,6 +433,17 @@
             this.progressBar.Size = new System.Drawing.Size(723, 60);
             this.progressBar.TabIndex = 1;
             // 
+            // logBox
+            // 
+            this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logBox.Enabled = false;
+            this.logBox.Location = new System.Drawing.Point(3, 3);
+            this.logBox.Name = "logBox";
+            this.logBox.ReadOnly = true;
+            this.logBox.Size = new System.Drawing.Size(723, 534);
+            this.logBox.TabIndex = 2;
+            this.logBox.Text = "";
+            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 1;
@@ -445,17 +456,6 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(729, 55);
             this.tableLayoutPanel5.TabIndex = 2;
-            // 
-            // logBox
-            // 
-            this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logBox.Enabled = false;
-            this.logBox.Location = new System.Drawing.Point(3, 3);
-            this.logBox.Name = "logBox";
-            this.logBox.ReadOnly = true;
-            this.logBox.Size = new System.Drawing.Size(723, 534);
-            this.logBox.TabIndex = 2;
-            this.logBox.Text = "";
             // 
             // buttonStop
             // 

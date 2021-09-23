@@ -40,7 +40,7 @@ namespace min_error_map
             this.bestCmax = this.problemInstance.calculateCmax().Item1;
         }
 
-        public void run(int timesToRestart, int tabuListMaxSize, int maxMovesWithoutProgess)
+        public void run(int timesToRestart, int tabuListMaxSize, int maxMovesWithoutProgess, double divMoves)
         {
             Matrix globalSolution = new Matrix(this.problemInstance);
             while(timesToRestart != 0)
@@ -59,7 +59,7 @@ namespace min_error_map
                     localSolution.calculateCmax();
 
                     // Check if new solution is better and add to Tabu
-                    if (newLocalSolutionMatrix.CMAX <= localSolution.CMAX)
+                    if (newLocalSolutionMatrix.CMAX < localSolution.CMAX)
                     {
                         if (tabuList.Count > tabuListMaxSize)
                         {
@@ -68,6 +68,17 @@ namespace min_error_map
                         tabuList.Add((randomColumnSwap[0], randomColumnSwap[1]));
                         localSolution = new Matrix(newLocalSolutionMatrix);
                         movesWithoutProgress = 0;
+                    }
+                    // If we are stuck in local optimum, add some divesifying moves
+                    else if(newLocalSolutionMatrix.CMAX == localSolution.CMAX && movesWithoutProgress > (int)(maxMovesWithoutProgess * divMoves))
+                    {
+                        localSolution = new Matrix(newLocalSolutionMatrix);
+                        if (tabuList.Count > tabuListMaxSize)
+                        {
+                            tabuList.RemoveAt(0);
+                        }
+                        tabuList.Add((randomColumnSwap[0], randomColumnSwap[1]));
+                        movesWithoutProgress++;
                     }
                     else
                         movesWithoutProgress++;
