@@ -298,7 +298,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(180, 25);
             this.label4.TabIndex = 3;
-            this.label4.Text = "% OF DIVERSIFY MOVES";
+            this.label4.Text = "% WHEN DIVERSIFY";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numericRestarts
@@ -436,7 +436,6 @@
             // logBox
             // 
             this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logBox.Enabled = false;
             this.logBox.Location = new System.Drawing.Point(3, 3);
             this.logBox.Name = "logBox";
             this.logBox.ReadOnly = true;
@@ -466,6 +465,7 @@
             this.buttonStop.TabIndex = 0;
             this.buttonStop.Text = "STOP";
             this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // mainForm
             // 

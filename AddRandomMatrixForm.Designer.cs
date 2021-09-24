@@ -30,19 +30,19 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.randomMatrixBackButton = new System.Windows.Forms.Button();
+            this.addRandomMatrixGenerateButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.numericHeight = new System.Windows.Forms.NumericUpDown();
             this.numericWidth = new System.Windows.Forms.NumericUpDown();
             this.numericMistakes = new System.Windows.Forms.NumericUpDown();
             this.numericPercent = new System.Windows.Forms.NumericUpDown();
-            this.randomMatrixBackButton = new System.Windows.Forms.Button();
-            this.addRandomMatrixGenerateButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -84,6 +84,28 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(513, 67);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // randomMatrixBackButton
+            // 
+            this.randomMatrixBackButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.randomMatrixBackButton.Location = new System.Drawing.Point(3, 3);
+            this.randomMatrixBackButton.Name = "randomMatrixBackButton";
+            this.randomMatrixBackButton.Size = new System.Drawing.Size(250, 61);
+            this.randomMatrixBackButton.TabIndex = 0;
+            this.randomMatrixBackButton.Text = "BACK";
+            this.randomMatrixBackButton.UseVisualStyleBackColor = true;
+            this.randomMatrixBackButton.Click += new System.EventHandler(this.randomMatrixBackButton_Click);
+            // 
+            // addRandomMatrixGenerateButton
+            // 
+            this.addRandomMatrixGenerateButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addRandomMatrixGenerateButton.Location = new System.Drawing.Point(259, 3);
+            this.addRandomMatrixGenerateButton.Name = "addRandomMatrixGenerateButton";
+            this.addRandomMatrixGenerateButton.Size = new System.Drawing.Size(251, 61);
+            this.addRandomMatrixGenerateButton.TabIndex = 1;
+            this.addRandomMatrixGenerateButton.Text = "GENERATE";
+            this.addRandomMatrixGenerateButton.UseVisualStyleBackColor = true;
+            this.addRandomMatrixGenerateButton.Click += new System.EventHandler(this.addRandomMatrixGenerateButton_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -174,18 +196,6 @@
             this.label5.Text = "% OF ONES IN ROW";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(507, 60);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "ADD RANDOM MATRIX";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // numericHeight
             // 
             this.numericHeight.Location = new System.Drawing.Point(382, 3);
@@ -225,6 +235,11 @@
             // numericMistakes
             // 
             this.numericMistakes.Location = new System.Drawing.Point(382, 191);
+            this.numericMistakes.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
             this.numericMistakes.Minimum = new decimal(new int[] {
             1,
             0,
@@ -265,27 +280,17 @@
             0,
             131072});
             // 
-            // randomMatrixBackButton
+            // label1
             // 
-            this.randomMatrixBackButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.randomMatrixBackButton.Location = new System.Drawing.Point(3, 3);
-            this.randomMatrixBackButton.Name = "randomMatrixBackButton";
-            this.randomMatrixBackButton.Size = new System.Drawing.Size(250, 61);
-            this.randomMatrixBackButton.TabIndex = 0;
-            this.randomMatrixBackButton.Text = "BACK";
-            this.randomMatrixBackButton.UseVisualStyleBackColor = true;
-            this.randomMatrixBackButton.Click += new System.EventHandler(this.randomMatrixBackButton_Click);
-            // 
-            // addRandomMatrixGenerateButton
-            // 
-            this.addRandomMatrixGenerateButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addRandomMatrixGenerateButton.Location = new System.Drawing.Point(259, 3);
-            this.addRandomMatrixGenerateButton.Name = "addRandomMatrixGenerateButton";
-            this.addRandomMatrixGenerateButton.Size = new System.Drawing.Size(251, 61);
-            this.addRandomMatrixGenerateButton.TabIndex = 1;
-            this.addRandomMatrixGenerateButton.Text = "GENERATE";
-            this.addRandomMatrixGenerateButton.UseVisualStyleBackColor = true;
-            this.addRandomMatrixGenerateButton.Click += new System.EventHandler(this.addRandomMatrixGenerateButton_Click);
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(507, 60);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "ADD RANDOM MATRIX";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AddRandomMatrixForm
             // 

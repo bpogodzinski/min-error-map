@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
@@ -14,6 +15,7 @@ namespace min_error_map
     public partial class mainForm : Form
     {
         public Matrix matrix = null;
+        CancellationTokenSource cancellationToken = new CancellationTokenSource();
 
         // https://stackoverflow.com/questions/1781172/generate-a-two-dimensional-array-via-linq/1814063#1814063
         public T[,] JaggedToMultidimensional<T>(T[][] jaggedArray)
@@ -79,7 +81,7 @@ namespace min_error_map
 
         private void mainRunTabuButton_Click(object sender, EventArgs e)
         {
-            int[,] matrix = null;
+            Matrix matrix = null;
             int numberOfRestarts;
             int tabuListSize;
             int maxIterWithoutProgress;
@@ -96,11 +98,11 @@ namespace min_error_map
                                                                .Split('\n')
                                                                .Select(line => line.Split(' ').Select(i => int.Parse(i)).ToArray())
                                                                .ToArray();
-                matrix = JaggedToMultidimensional(tmpMatrix);
-                numberOfRestarts = (int)numericRestarts.Value;
-                tabuListSize = (int)numericTabuSize.Value;
-                maxIterWithoutProgress = (int)numericMaxIter.Value;
-                divMovements = (double)numericDivMoves.Value;
+                matrix = new Matrix(JaggedToMultidimensional(tmpMatrix));
+                numberOfRestarts = (int)this.numericRestarts.Value;
+                tabuListSize = (int)this.numericTabuSize.Value;
+                maxIterWithoutProgress = (int)this.numericMaxIter.Value;
+                divMovements = (double)this.numericDivMoves.Value;
 
                 if(divMovements > 1 || divMovements < 0)
                     throw new ArgumentException("Bad value for % OF DIVERSIFY MOVES");
@@ -111,8 +113,42 @@ namespace min_error_map
                 MessageBox.Show($"{error.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-            
+
+            this.logBox.Text = "";
+            cancellationToken = new CancellationTokenSource();
+            runTabuSearch(matrix, numberOfRestarts, tabuListSize, maxIterWithoutProgress, divMovements, cancellationToken);
         }
+
+        public async Task runTabuSearch(Matrix matrix, int numberOfRestarts, int tabuListSize, int maxIterWithoutProgress, double divMovements, CancellationTokenSource cancellationToken)
+        {
+            TabuSearch ts = new TabuSearch(matrix);
+            progressBar.Maximum = numberOfRestarts;
+            progressBar.Step = 1;
+            progressBar.Value = 0;
+            var progress = new Progress<int>(v => { progressBar.PerformStep(); });
+            matrix.calculateCmax();
+            this.logBox.Text += $"BEGIN COMPUTING\n---------\n";
+            this.logBox.Text += $"NUMBER OF RESTARTS: {numberOfRestarts}\n" +
+                                $"TABU LIST SIZE: {tabuListSize}\n" +
+                                $"MAXIMUM ITERATIONS WITHOUT PROGRESS: {maxIterWithoutProgress}\n" +
+                                $"PERCENT OF ITERATIONS WITHOUT PROGRESS WHEN DIVERSIFYING STARTS: {divMovements}\n" +
+                                $"PROBLEM INSTANCE:\n\n{matrix}\n";
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            int restartsLeft = 0;
+            await Task.Run(() => restartsLeft = ts.run(numberOfRestarts, tabuListSize, maxIterWithoutProgress, divMovements, progress, cancellationToken.Token));
+            watch.Stop();
+            this.logBox.Text += $"\n" +
+                                $"STOP COMPUTING\n---------\n" +
+                                $"TIME ELAPSED: {watch.Elapsed.TotalMilliseconds / 1000} s\n" +
+                                $"RESTARTS LEFT: {restartsLeft}\n" +
+                                $"LAST BEST GLOBAL SOLUTION:\n\n{ts.globalSolution}\n";
+
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            cancellationToken.Cancel();
+        }
+
     }
 }

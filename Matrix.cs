@@ -288,12 +288,11 @@ namespace min_error_map
             {
                 stringBuilder.AppendLine(String.Join(" ", this.getRow(i)));
             }
-
+            stringBuilder.Length = stringBuilder.Length - 2; //remove last newline + CR
             return stringBuilder.ToString();
         }
     }
 
-    //TODO: remove Debug.Assert statements 
     class RandomMatrix : Matrix
     {
         public int numberOfMistakes = 0;
@@ -307,11 +306,9 @@ namespace min_error_map
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
             this._matrix = this.fillMatrixWithOnes(this._matrix);
-            Debug.Assert(isConsecutiveOnes() == true);
             this.originalMatrix = this._matrix;
             this._matrix = this.mixMatrixRows(this._matrix);
             this._matrix = this.addMistakesToMatrix(this._matrix);
-            Debug.Assert(this.isConsecutiveOnes() == false);
         }
 
         public RandomMatrix(int[,] matrix, int numberOfMistakes, double percentageOfOnesInRow)
@@ -320,11 +317,9 @@ namespace min_error_map
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
             this._matrix = this.fillMatrixWithOnes(this._matrix);
-            Debug.Assert(isConsecutiveOnes() == true);
             this.originalMatrix = this._matrix;
             this._matrix = this.mixMatrixRows(this._matrix);
             this._matrix = this.addMistakesToMatrix(this._matrix);
-            Debug.Assert(isConsecutiveOnes() == false);
         }
 
         public RandomMatrix(Matrix matrix, int numberOfMistakes, double percentageOfOnesInRow)
@@ -333,11 +328,9 @@ namespace min_error_map
             this.numberOfMistakes = numberOfMistakes;
             this.percentageOfOnesInRow = percentageOfOnesInRow;
             this._matrix = this.fillMatrixWithOnes(this._matrix);
-            Debug.Assert(isConsecutiveOnes() == true);
             this.originalMatrix = this._matrix;
             this._matrix = this.mixMatrixRows(this._matrix);
             this._matrix = this.addMistakesToMatrix(this._matrix);
-            Debug.Assert(isConsecutiveOnes() == false);
         }
 
         private int[,] fillMatrixWithOnes(int[,] matrix)
@@ -387,7 +380,6 @@ namespace min_error_map
             int width = matrix.GetLength(1);
             int mistakesCount = 0;
 
-            // TODO: zmień (int)Math.Ceiling((double)this.numberOfMistakes / height)
             var rowsToChange = Enumerable.Repeat(Enumerable.Range(0, height).ToArray(),
                                                 (int)Math.Ceiling((double)this.numberOfMistakes / height))
                                         .SelectMany(x => x)
